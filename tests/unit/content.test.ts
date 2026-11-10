@@ -47,7 +47,7 @@ describe("overrides schema", () => {
 describe("company products stay abstract", () => {
   // Company and client product stories may describe capabilities, role and outcomes only.
   // Lab projects, the toolkit and this site are Zuhaib's own and are exempt.
-  const companySlugs = ["surgycrm", "surgy-assist", "automation", "performance", "surgyfield", "platform-kit", "surgy-suite", "samatvalife"];
+  const companySlugs = ["surgycrm", "surgy-assist", "automation", "performance", "surgyfield", "platform-kit", "surgy-suite", "samatvalife", "ai-gateway", "privacy-controls"];
   const banned = [
     /supabase/i, /\bdeno\b/i, /pg_cron/i, /terraform/i, /\bec2\b/i, /\buae\b/i, /\bgcc\b/i, /\bindia\b/i,
     /meta lead/i, /conversions api/i, /whatsapp/i, /gemini/i, /\bhmac\b/i, /advisory/i,

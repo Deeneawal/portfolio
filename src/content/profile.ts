@@ -5,7 +5,7 @@ export const profile = {
   shortName: "Zuhaib",
   initials: "ZK",
   title: "Agentic Full-Stack Engineer",
-  role: "Platform & Agentic AI Engineer · Product Lead",
+  role: "Full-Stack Engineer & Product Lead",
   company: "Surgy Innovation Labs",
   companyUrl: "https://surgy.health",
   location: "Bengaluru, India",
@@ -13,7 +13,7 @@ export const profile = {
   availability: "Open to full-time roles in agentic AI, full-stack and mobile, remote, in Bengaluru or relocating.",
   headline: "I build hospital software end to end, along with the guardrails that let AI agents build it safely.",
   intro:
-    "I'm a platform and full-stack engineer and a product lead. I take products from a hospital's first requirement to production: React and TypeScript frontends, PostgreSQL with Row-Level Security, serverless APIs, Flutter apps, AI integrations and the automation that connects them. I'm also a co-author of Hospital AI 2027, a field guide to agentic AI for hospital leaders.",
+    "I'm a full-stack engineer and product lead. I take products from a hospital's first requirement to production: React and TypeScript frontends, PostgreSQL with Row-Level Security, serverless APIs, Flutter apps, AI integrations and the automation that connects them. I'm also a co-author of Hospital AI 2027, a field guide to agentic AI for hospital leaders.",
   email: "zuhaibahmadkhan07@gmail.com",
   phone: "+91 63667 51866",
   phoneHref: "tel:+916366751866",
@@ -62,6 +62,7 @@ export const posts: readonly { title: string; href: string; date: string; where:
     href: "https://medium.com/@zuhaib_99173/inside-surgycrm-building-a-hospital-crm-that-doesnt-let-patients-slip-through-ddacf54fccc5",
     date: "28 Oct 2026",
     where: "Medium",
+    minutes: 4,
   },
   {
     title: "The Hospital Chatbot Playbook: How SurgyCRM Turns Website Visitors Into Patients, 24/7",

@@ -225,11 +225,20 @@ export const workStories: StoryBody[] = [
   },
   {
     slug: "surgy-suite",
-    lede: "SurgyCRM is where I've gone deepest, but I also lead development on other products in the family and keep releases safe across all of them.",
+    lede: "SurgyCRM is where I've gone deepest. Since November 2026 I'm also product lead for SurgyScribe and SurgyFrontdesk, and I keep releases safe across the product family.",
     blocks: [
       {
         type: "list",
-        heading: "Products",
+        heading: "Products I lead now",
+        columns: 2,
+        items: [
+          { title: "SurgyScribe", body: "Clinical documentation: a consultation becomes a structured note that the doctor reviews and signs." },
+          { title: "SurgyFrontdesk", body: "A voice agent that answers and makes patient calls on the hospital's own phone line, and hands complex calls to staff." },
+        ],
+      },
+      {
+        type: "list",
+        heading: "Earlier work",
         columns: 2,
         items: [
           { title: "SurgyDischarge", body: "Secure discharge management, deployed in isolation for compliance-heavy hospitals." },
@@ -251,12 +260,12 @@ export const workStories: StoryBody[] = [
         ],
       },
     ],
-    related: ["planning-delivery", "platform-kit", "surgycrm"],
+    related: ["surgycrm", "ai-gateway", "privacy-controls", "platform-kit"],
   },
   {
     slug: "samatvalife",
     lede:
-      "Samatvalife is a wellness platform where members book live classes with coaches and attend them online or offline. It spans four apps: member, coach, admin and the service behind them. Both mobile apps are on Google Play.",
+      "Samatvalife is a wellness platform where members book live classes with coaches and attend them online or offline. It spans four apps: member, coach, admin and the service behind them. It was my first project at Surgy, from December 2025 to May 2026, and I was the lead engineer in the team. Both mobile apps are on Google Play.",
     blocks: [
       {
         type: "stats",
@@ -293,7 +302,7 @@ export const workStories: StoryBody[] = [
   },
   {
     slug: "decovision",
-    lede: "Decovision Infra needed a fast website that ranks well and that their team could keep updating. I've built it twice, each time adapting to what they needed.",
+    lede: "A side project outside my day job. Decovision Infra needed a fast website that ranks well and that their team could keep updating. I've built it twice, each time adapting to what they needed.",
     blocks: [
       {
         type: "list",
@@ -310,5 +319,80 @@ export const workStories: StoryBody[] = [
       { type: "tags", items: ["React", "Vite", "Tailwind CSS", "shadcn/ui", "Motion", "SEO", "Vercel", "Lovable"] },
     ],
     related: ["samatvalife", "ui-ux"],
+  },
+  {
+    slug: "ai-gateway",
+    lede:
+      "In November 2026 I moved every AI call in the product behind one wrapper and onto an in-region provider. No feature talks to a model directly any more, so privacy, cost and reliability are handled once, in one place.",
+    blocks: [
+      {
+        type: "steps",
+        heading: "What happens to every AI call",
+        items: [
+          { title: "Remove personal details", body: "Names, numbers and other identifiers are replaced with placeholders before anything leaves the system." },
+          { title: "Guard the exit", body: "A final check looks for anything that slipped through. If it finds an identifier, the call is refused, not sent." },
+          { title: "Check the budget", body: "Each AI use has a daily allowance and an answer-length cap. A spent allowance stops the call before any provider is contacted." },
+          { title: "Call the in-region provider", body: "The request goes to the main provider with a time limit and one retry for temporary failures." },
+          { title: "Fall back only when it's safe", body: "If the main provider fails, a second one takes over. A call blocked for privacy or budget is never retried elsewhere." },
+          { title: "Log every attempt", body: "Each attempt is recorded with its purpose, model and outcome, and what was disclosed is logged too." },
+          { title: "Restore the details", body: "Placeholders in the answer are swapped back, so the user sees real names and the model never did." },
+        ],
+      },
+      {
+        type: "decisions",
+        heading: "Decisions, written down",
+        items: [
+          {
+            title: "One door, not many",
+            context: "A privacy or cost rule added to one feature is easy to miss in the next.",
+            choice: "Every feature goes through the same wrapper.",
+            why: "A privacy rule or a budget written once applies everywhere, and a new feature can't forget it.",
+          },
+          {
+            title: "Fail closed",
+            context: "A privacy check that fails open sends the data anyway.",
+            choice: "If the check can't be sure, the call doesn't go out.",
+            why: "A missing AI answer is an inconvenience. A leaked identifier can't be taken back.",
+          },
+          {
+            title: "One allowance across providers",
+            context: "A fallback provider could quietly double the spend.",
+            choice: "The daily budget is one allowance, whichever provider answers.",
+            why: "Reliability shouldn't be a way around the cost limit.",
+          },
+        ],
+      },
+      { type: "principle", body: "The model sees placeholders. People see names. The budget sees every call." },
+      { type: "tags", items: ["LLMs", "De-identification", "Cost control", "Fallbacks", "Observability", "Testing"] },
+    ],
+    related: ["surgy-assist", "cost-speed", "privacy-controls", "safeguards"],
+  },
+  {
+    slug: "privacy-controls",
+    lede:
+      "Hospitals hold some of the most sensitive data there is, and data-protection law now expects them to prove how they handle it. In November 2026 I built the controls that let a hospital show its work, not just promise it.",
+    blocks: [
+      {
+        type: "list",
+        heading: "What I built",
+        columns: 2,
+        items: [
+          { title: "Consent and basis records", body: "For each person, a record of what they agreed to, or the legal basis the hospital relies on, and when." },
+          { title: "An audit trail", body: "A record of who looked at or changed sensitive data, and when." },
+          { title: "Masked phone numbers", body: "Phone numbers are masked for staff who don't need the full number." },
+          { title: "A privacy centre", body: "One place for a hospital to handle requests to see, export or erase a person's data, and to set how long data is kept." },
+          { title: "Details removed before AI", body: "Personal identifiers are replaced with placeholders before any text reaches a model." },
+          { title: "Tested from outside", body: "Findings from a penetration test were fixed and then retested." },
+        ],
+      },
+      {
+        type: "text",
+        heading: "Why I could build it",
+        body: "I studied the data-protection law before writing the code, and passed a certification on it with 98% in October 2026. The features follow what the law asks a hospital to be able to show.",
+      },
+      { type: "principle", body: "Privacy that can't be shown to an auditor is only a promise." },
+      { type: "tags", items: ["Data protection", "Consent", "Audit trail", "Access control", "Security testing"] },
+    ],
+    related: ["safeguards", "ai-gateway", "surgycrm", "journey"],
   },
 ];

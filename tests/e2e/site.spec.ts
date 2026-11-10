@@ -11,7 +11,7 @@ test("home renders the hero, groups and résumé link", async ({ page }) => {
   for (const g of ["Today", "How I work", "What I've shipped", "Lab", "About"]) {
     await expect(page.getByRole("heading", { level: 2, name: g })).toBeAttached();
   }
-  await expect(page.locator("[data-tile]")).toHaveCount(25);
+  await expect(page.locator("[data-tile]")).toHaveCount(27);
   await expect(page.getByRole("link", { name: /Download résumé/ }).first()).toHaveAttribute("href", "/api/resume");
   await noHorizontalOverflow(page);
 });

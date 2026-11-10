@@ -73,7 +73,7 @@ if (RISKY.some((re) => re.test(command))) {
       {
         type: "tags",
         heading: "Tools",
-        items: ["Claude Code", "Subagents", "Hooks", "Plan mode", "Lovable", "Cursor", "CI/CD"],
+        items: ["Claude Code", "Cursor", "Subagents", "Hooks", "Skills", "MCP connectors", "Plan mode", "Lovable", "CI/CD"],
       },
     ],
     related: ["agent-setup", "safeguards", "cost-speed", "hospital-ai-2027"],
@@ -108,9 +108,28 @@ if (RISKY.some((re) => re.test(command))) {
             title: "Checks",
             body: "Tests, a clean-database replay of every data change in CI, and my own review. Nothing the agent writes goes live until I have read it and can explain it.",
           },
+        ],
+      },
+      {
+        type: "list",
+        heading: "How I extend the agent",
+        columns: 2,
+        items: [
+          {
+            title: "Connectors (MCP)",
+            body: "The agent reaches the tools I already work in: design files, team chat and documents, the hosting platform for deploys and logs, and the database.",
+          },
+          {
+            title: "Skills I wrote",
+            body: "Repeatable jobs packaged as skills: a release routine, a database-change routine, a review and audit routine, and a docs routine. The agent follows the same steps every time.",
+          },
           {
             title: "Narrow agents",
             body: "Risky jobs get their own agent with a short list of allowed and forbidden actions. The release agent can do one thing, and it asks before each deploy.",
+          },
+          {
+            title: "Plugins and editor rules",
+            body: "Ready-made plugins where they exist, and project rules written for both Claude Code and Cursor, so the agent behaves the same in either.",
           },
         ],
       },
@@ -152,7 +171,7 @@ if (RISKY.some((re) => re.test(command))) {
         ],
       },
       { type: "principle", body: "When an agent fails, I fix its context, tools or checks. That fix lasts longer than a better prompt." },
-      { type: "tags", heading: "Tools", items: ["Claude Code", "Cursor", "Hooks", "Subagents", "Plan mode", "Project rules", "Session memory", "CI/CD"] },
+      { type: "tags", heading: "Tools", items: ["Claude Code", "Cursor", "MCP connectors", "Skills", "Plugins", "Hooks", "Subagents", "Plan mode", "Cursor rules", "Session memory", "CI/CD"] },
     ],
     related: ["agentic-workflow", "safeguards", "cost-speed", "platform-kit"],
   },
@@ -221,7 +240,7 @@ if (RISKY.some((re) => re.test(command))) {
       },
       { type: "principle", body: "Every token should buy something: an answer, a check or a decision." },
     ],
-    related: ["agent-setup", "performance", "surgy-assist", "planning-delivery"],
+    related: ["agent-setup", "ai-gateway", "performance", "surgy-assist"],
   },
   {
     slug: "safeguards",
@@ -280,7 +299,7 @@ if (RISKY.some((re) => re.test(command))) {
       },
       { type: "principle", body: "An incident isn't closed until it has become a rule, a check or a test." },
     ],
-    related: ["agentic-workflow", "agent-setup", "surgycrm", "platform-kit"],
+    related: ["agentic-workflow", "agent-setup", "privacy-controls", "surgycrm"],
   },
   {
     slug: "planning-delivery",

@@ -92,7 +92,7 @@ export const aboutStories: StoryBody[] = [
       {
         type: "image",
         src: "/images/hospital-ai-2027/book-mockup.jpg",
-        alt: "The book Hospital AI 2027: From listening to acting to orchestrating, by Mohammed Jamil Nasir, Zuhaib Ahmed Khan and Simran Nagekar",
+        alt: "The book Hospital AI 2027: From listening to acting to orchestrating, with its three authors named on the cover",
         width: 1600,
         height: 1200,
         href: book.href,
@@ -256,8 +256,8 @@ export const aboutStories: StoryBody[] = [
           },
           {
             when: "Dec 2025 – now",
-            title: "Platform & Agentic AI Engineer · Product Lead · Surgy Innovation Labs",
-            body: "Bengaluru (hybrid). Built SurgyCRM and SurgyField, and lead development across SurgyCRM, SurgyDischarge and SurgyLearn.",
+            title: "Full-Stack Engineer & Product Lead · Surgy Innovation Labs",
+            body: "Bengaluru (hybrid). My first project was Samatvalife (Dec 2025 – May 2026). I built SurgyCRM and SurgyField, and I'm now product lead for SurgyCRM, SurgyScribe and SurgyFrontdesk.",
           },
           {
             when: "Jul 2025",

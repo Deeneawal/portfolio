@@ -13,7 +13,7 @@ import { VercelInsights } from "@/components/analytics/VercelInsights";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", preload: false });
 
 const description =
-  "Zuhaib Ahmad Khan is an agentic full-stack and platform engineer and product lead who builds multi-tenant healthcare SaaS end to end: React, TypeScript, PostgreSQL with RLS, serverless APIs, Flutter and AI agents working inside guardrails. Co-author of Hospital AI 2027. Based in Bengaluru, open to remote roles or relocation.";
+  "Zuhaib Ahmad Khan is an agentic full-stack engineer and product lead who builds multi-tenant healthcare SaaS end to end: React, TypeScript, PostgreSQL with RLS, serverless APIs, Flutter and AI agents working inside guardrails. Co-author of Hospital AI 2027. Based in Bengaluru, open to remote roles or relocation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
