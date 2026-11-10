@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowLeft, LogOut, PenLine } from "lucide-react";
+import { ArrowLeft, Inbox, LogOut, PenLine } from "lucide-react";
 import { requireAdmin } from "@/lib/auth/admin";
 import { loadDashboard, type Summary } from "@/lib/analytics/queries";
+import { countUnread } from "@/lib/contact/store";
 import { getStoryMeta } from "@/content";
 import { DailyBars, TopList } from "@/components/admin/Charts";
 import { OwnerFlag } from "@/components/admin/OwnerFlag";
@@ -44,7 +45,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   await requireAdmin();
   const { days: rawDays } = await searchParams;
   const days = RANGES.find((d) => String(d) === rawDays) ?? 30;
-  const data = await loadDashboard(days);
+  const [data, unread] = await Promise.all([loadDashboard(days), countUnread().catch(() => 0)]);
   const s = data.summary as Summary | undefined;
 
   return (
@@ -58,6 +59,10 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         <div className="flex items-center gap-2">
           <Link href="/" className="inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-[14px] font-medium shadow-sm ring-1 ring-black/[0.06]">
             <ArrowLeft aria-hidden className="size-4" /> Site
+          </Link>
+          <Link href="/admin/messages" className="inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-[14px] font-medium shadow-sm ring-1 ring-black/[0.06]">
+            <Inbox aria-hidden className="size-4" /> Messages
+            {unread > 0 && <span className="rounded-full bg-accent px-2 py-0.5 text-[12px] font-semibold tabular-nums text-white">{unread}</span>}
           </Link>
           <Link href="/admin/content" className="inline-flex h-10 items-center gap-2 rounded-full bg-accent px-4 text-[14px] font-medium text-white">
             <PenLine aria-hidden className="size-4" /> Edit content

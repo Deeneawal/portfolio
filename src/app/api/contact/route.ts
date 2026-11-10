@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { contactConfigured, sendContactEmail } from "@/lib/contact/email";
+import { messageStoreConfigured, saveMessage } from "@/lib/contact/store";
 import { contactSchema, fieldErrors, looksAutomated } from "@/lib/contact/schema";
 
 export const runtime = "nodejs";
@@ -23,6 +24,15 @@ function tooMany(ip: string): boolean {
   recent.set(ip, hits);
   if (recent.size > 5000) recent.clear();
   return false;
+}
+
+function decodeCity(value: string | null): string | null {
+  if (!value) return null;
+  try {
+    return decodeURIComponent(value).slice(0, 80);
+  } catch {
+    return value.slice(0, 80);
+  }
 }
 
 function json(body: Record<string, unknown>, status: number) {
@@ -51,7 +61,8 @@ export async function POST(req: NextRequest) {
   // Answer bots as if it worked, so they learn nothing, and send nothing.
   if (looksAutomated(input)) return json({ ok: true }, 200);
 
-  if (!contactConfigured()) return json({ ok: false, error: "not_configured" }, 503);
+  // A message can be emailed, kept for the owner's dashboard, or both. With neither set up, say so.
+  if (!contactConfigured() && !messageStoreConfigured()) return json({ ok: false, error: "not_configured" }, 503);
 
   const ip = req.headers.get("x-real-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (tooMany(ip)) return json({ ok: false, error: "rate_limited" }, 429);
@@ -64,10 +75,18 @@ export async function POST(req: NextRequest) {
     page = null;
   }
 
-  const sent = await sendContactEmail(input, { page });
-  if (!sent.ok) {
-    console.error("contact form: send failed:", sent.detail);
-    return json({ ok: false, error: "send_failed" }, 502);
-  }
+  const sent = contactConfigured() ? await sendContactEmail(input, { page }) : ({ ok: false, detail: "not_configured" } as const);
+  if (!sent.ok && sent.detail !== "not_configured") console.error("contact form: send failed:", sent.detail);
+
+  const country = req.headers.get("x-vercel-ip-country");
+  const stored = await saveMessage(input, {
+    page,
+    country: country && /^[A-Z]{2}$/.test(country) ? country : null,
+    city: decodeCity(req.headers.get("x-vercel-ip-city")),
+    emailSent: sent.ok,
+  });
+
+  // The visitor is told it worked when the message reached the inbox or the dashboard.
+  if (!sent.ok && !stored) return json({ ok: false, error: "send_failed" }, 502);
   return json({ ok: true }, 200);
 }

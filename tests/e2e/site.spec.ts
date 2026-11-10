@@ -92,6 +92,9 @@ test("admin pages are private", async ({ page, request }) => {
   expect(res.headers()["location"]).toContain("/admin/login");
   const content = await request.get("/admin/content", { maxRedirects: 0 });
   expect(content.status()).toBe(307);
+  const messages = await request.get("/admin/messages", { maxRedirects: 0 });
+  expect(messages.status()).toBe(307);
+  expect(messages.headers()["location"]).toContain("/admin/login");
   await page.goto("/admin/login");
   await expect(page.getByRole("heading", { name: "Owner dashboard" })).toBeVisible();
   expect((await request.get("/admin/login")).headers()["x-robots-tag"]).toContain("noindex");

@@ -77,7 +77,7 @@ export function ContactForm({ email }: { email: string }) {
       <div role="status" className="rounded-[24px] bg-[#e9f8f1] px-6 py-8 sm:px-8">
         <CheckCircle2 aria-hidden className="size-8 text-[#1d6b40]" />
         <p className="display mt-3 text-[1.5rem] text-ink">Message sent. Thank you.</p>
-        <p className="mt-2 max-w-xl text-[16px] leading-relaxed text-ink-2">It is in my inbox now, and I reply to the address you gave, usually within a day or two.</p>
+        <p className="mt-2 max-w-xl text-[16px] leading-relaxed text-ink-2">I have it now, and I reply to the address you gave, usually within a day or two.</p>
         <button
           type="button"
           onClick={() => {
@@ -169,7 +169,7 @@ export function ContactForm({ email }: { email: string }) {
         >
           <Send aria-hidden className="size-[18px]" /> {status.kind === "sending" ? "Sending…" : "Send message"}
         </button>
-        <p className="text-[13px] text-muted">Goes straight to my inbox. Nothing is stored on this site.</p>
+        <p className="text-[13px] text-muted">Sent to me only. I keep it privately so I can reply.</p>
       </div>
 
       <div aria-live="polite">

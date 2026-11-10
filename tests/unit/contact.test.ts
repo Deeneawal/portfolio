@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildContactEmail } from "@/lib/contact/email";
 import { contactSchema, fieldErrors, looksAutomated } from "@/lib/contact/schema";
+import { MESSAGE_ID, newMessageId } from "@/lib/contact/store";
 
 const good = { name: "Asha Rao", email: "asha@example.com", message: "Hello, I'd like to talk about a role.", elapsedMs: 5000 };
 
@@ -45,5 +46,18 @@ describe("contact email", () => {
     expect(mail.html).not.toContain("<script>");
     expect(mail.html).not.toContain("<b>Eve</b>");
     expect(mail.html).toContain("&lt;script&gt;");
+  });
+});
+
+describe("stored message ids", () => {
+  it("match the pattern the table and the admin actions accept", () => {
+    expect(newMessageId()).toMatch(MESSAGE_ID);
+    expect(MESSAGE_ID.test("../../etc/passwd")).toBe(false);
+    expect(MESSAGE_ID.test("1762780000000-abcdef12.json")).toBe(false);
+  });
+  it("sort newest last as plain text, so listings can order by id", () => {
+    const older = newMessageId(1_762_780_000_000);
+    const newer = newMessageId(1_762_780_000_001);
+    expect(older < newer).toBe(true);
   });
 });
