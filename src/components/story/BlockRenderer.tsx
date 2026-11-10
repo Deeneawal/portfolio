@@ -4,6 +4,7 @@ import type { Block } from "@/content/types";
 import type { SiteProfile } from "@/lib/content/site";
 import { Diagram } from "@/components/diagrams";
 import { GithubIcon, LeetcodeIcon, LinkedinIcon, WhatsappIcon } from "@/components/icons";
+import { ContactForm } from "./ContactForm";
 import { cn } from "@/lib/cn";
 
 function Heading({ children }: { children: string }) {
@@ -311,6 +312,11 @@ function ContactBlock({ profile }: { profile: SiteProfile }) {
   ];
   return (
     <section className="space-y-5">
+      <div>
+        <Heading>Send me a message</Heading>
+        <ContactForm email={profile.email} />
+      </div>
+      <h2 className="pt-3 text-[15px] font-semibold text-ink">Or reach me directly</h2>
       <ul className="grid gap-2 sm:grid-cols-2">
         {rows.map((r) => (
           <li key={r.label}>

@@ -116,3 +116,22 @@ test.describe("reduced motion", () => {
     await expect(page.getByRole("dialog")).toBeVisible({ timeout: 1000 });
   });
 });
+
+test("the contact form checks its fields and falls back to email when mail is not set up", async ({ page }) => {
+  await page.goto("/story/contact");
+  const form = page.getByRole("form", { name: "Send me a message" });
+  await expect(form).toBeVisible();
+
+  await form.getByRole("button", { name: "Send message" }).click();
+  await expect(form.getByText("Please enter your name")).toBeVisible();
+
+  await form.getByLabel("Your name").fill("Test Visitor");
+  await form.getByLabel("Your email").fill("visitor@example.com");
+  await form.getByLabel("Message").fill("Hello, this is a test message from the end-to-end suite.");
+  // The form ignores instant submissions, as a bot check.
+  await page.waitForTimeout(1600);
+  await form.getByRole("button", { name: "Send message" }).click();
+  await expect(form.getByText("could not be sent from here")).toBeVisible();
+  await expect(form.getByRole("link", { name: /@gmail\.com/ })).toBeVisible();
+  await noHorizontalOverflow(page);
+});

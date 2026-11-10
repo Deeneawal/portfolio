@@ -9,7 +9,7 @@ export interface DiagramNode {
   accent?: boolean;
 }
 
-function NodeCard({ node, className }: { node: DiagramNode; className?: string }) {
+function NodeCard({ node, className, step, next }: { node: DiagramNode; className?: string; step?: number; next?: boolean }) {
   return (
     <div
       className={cn(
@@ -18,6 +18,19 @@ function NodeCard({ node, className }: { node: DiagramNode; className?: string }
         className,
       )}
     >
+      {step !== undefined && (
+        <p className="mb-2.5 flex items-center justify-between" aria-hidden>
+          <span
+            className={cn(
+              "grid size-6 place-items-center rounded-full text-[12px] font-semibold",
+              node.accent ? "bg-white/20 text-white" : "bg-accent/10 text-accent",
+            )}
+          >
+            {step}
+          </span>
+          {next && <ArrowRight className={cn("size-4", node.accent ? "text-white/70" : "text-faint")} />}
+        </p>
+      )}
       <p className="text-[15px] font-semibold leading-snug">{node.title}</p>
       {node.body && <p className={cn("mt-1 text-[13px] leading-snug", node.accent ? "text-white" : "text-muted")}>{node.body}</p>}
       {node.items && (
@@ -49,24 +62,38 @@ function Arrow({ direction = "responsive" }: { direction?: "responsive" | "down"
   );
 }
 
-/** A left-to-right pipeline on large screens, top-to-bottom on phones. */
+/**
+ * A left-to-right pipeline on large screens, top-to-bottom on phones.
+ * More than five steps don't fit on one line, so they become a numbered grid that reads row by row.
+ */
 export function Flow({ nodes, loopLabel }: { nodes: DiagramNode[]; loopLabel?: string }) {
+  const wraps = nodes.length > 5;
   return (
     <div>
-      <ol className="flex flex-col items-stretch gap-2 lg:flex-row lg:items-center">
-        {nodes.map((node, i) => (
-          <Fragment key={node.title}>
-            <li className="lg:min-w-0 lg:flex-1">
-              <NodeCard node={node} className="h-full" />
+      {wraps ? (
+        <ol className={cn("grid grid-cols-2 gap-2 sm:gap-3", nodes.length === 6 ? "lg:grid-cols-3" : "lg:grid-cols-4")}>
+          {nodes.map((node, i) => (
+            <li key={node.title}>
+              <NodeCard node={node} className="h-full" step={i + 1} next={i < nodes.length - 1} />
             </li>
-            {i < nodes.length - 1 && (
-              <li aria-hidden className="flex justify-center">
-                <Arrow />
+          ))}
+        </ol>
+      ) : (
+        <ol className="flex flex-col items-stretch gap-2 lg:flex-row lg:items-center">
+          {nodes.map((node, i) => (
+            <Fragment key={node.title}>
+              <li className="lg:min-w-0 lg:flex-1">
+                <NodeCard node={node} className="h-full" />
               </li>
-            )}
-          </Fragment>
-        ))}
-      </ol>
+              {i < nodes.length - 1 && (
+                <li aria-hidden className="flex justify-center">
+                  <Arrow />
+                </li>
+              )}
+            </Fragment>
+          ))}
+        </ol>
+      )}
       {loopLabel && (
         <p className="mt-4 flex items-center justify-center gap-2 text-[13px] font-medium text-muted">
           <RotateCcw aria-hidden className="size-4 text-accent" /> {loopLabel}

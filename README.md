@@ -38,6 +38,9 @@ Without Supabase variables the site works fully; analytics and the editor just s
 | `VISITOR_SALT_SECRET` | Secret for the daily-rotating visitor hash (`openssl rand -hex 32`) |
 | `CRON_SECRET` | Bearer token for the daily `/api/keepalive` cron |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL, e.g. `https://zuhaibkhan.vercel.app` |
+| `RESEND_API_KEY` | Mail key for the contact form ([resend.com](https://resend.com)). Without it the form points visitors to direct email. |
+| `CONTACT_TO` | Optional. Where contact messages go; defaults to the email on the site. |
+| `CONTACT_FROM` | Optional. Sender shown on contact emails; defaults to Resend's test sender, which can deliver only to the Resend account's own address. |
 
 ## Database setup (one time)
 
