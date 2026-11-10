@@ -90,6 +90,24 @@ export const aboutStories: StoryBody[] = [
     lede: `${book.title}: ${book.subtitle} is our newly published handbook for hospital CEOs, CIOs, medical directors and finance heads. It shows what changed in hospital AI in 2026, what is working, what to avoid, and how to choose and govern an AI-first hospital system in 2027. It's free to download.`,
     blocks: [
       {
+        type: "image",
+        src: "/images/hospital-ai-2027/book-mockup.jpg",
+        alt: "The book Hospital AI 2027: From listening to acting to orchestrating, by Mohammed Jamil Nasir, Zuhaib Ahmed Khan and Simran Nagekar",
+        width: 1600,
+        height: 1200,
+        href: book.href,
+        caption: "Hospital AI 2027, first edition, November 2026. Select the cover to open the book page on surgy.health.",
+      },
+      {
+        type: "cta",
+        eyebrow: "Free field guide",
+        title: "Get your copy of Hospital AI 2027, free.",
+        body: "95 pages for hospital leaders: what changed in 2026, what is working, what to avoid, and a buyer's scorecard, a 90-day plan and a readiness check you can use the same day.",
+        primary: { label: "Get the free guide", href: book.href },
+        secondary: { label: "Open the PDF", href: book.pdfHref },
+        note: `Published by Surgy Health · ISBN ${book.isbn}`,
+      },
+      {
         type: "stats",
         items: [
           { value: "15", label: "chapters in five parts" },
@@ -99,19 +117,54 @@ export const aboutStories: StoryBody[] = [
         ],
       },
       {
-        type: "links",
-        heading: "Read it",
-        items: [
-          { label: "Hospital AI 2027 on surgy.health", href: book.href, note: "Book page and free download" },
-          { label: "Direct PDF", href: book.pdfHref, note: `First edition · ISBN ${book.isbn}` },
-        ],
-      },
-      {
         type: "text",
         heading: "The argument",
         body: [
           "Hospital AI is moving through three stages. It started by listening: scribes that write the note. It is now acting: agents that draft prescriptions, chase approvals and answer patient calls, with a person signing off. Next comes orchestrating: many agents, people and systems coordinated around one hospital goal, with rules and an audit trail holding it together.",
           "Each stage brings real gains and real risk, so every chapter pairs what the evidence shows with what a hospital should do about it.",
+        ],
+      },
+      {
+        type: "gallery",
+        heading: "Look inside",
+        intro: "Four pages from the book. Select any page to open it in the PDF.",
+        items: [
+          {
+            src: "/images/hospital-ai-2027/three-shifts.jpg",
+            alt: "Page 11 of Hospital AI 2027: the three shifts at a glance, listening, acting and orchestrating",
+            width: 909,
+            height: 1287,
+            title: "The three shifts at a glance",
+            caption: "Page 11 · Listening, acting, orchestrating",
+            href: `${book.pdfHref}#page=11`,
+          },
+          {
+            src: "/images/hospital-ai-2027/buyers-scorecard.jpg",
+            alt: "Page 43 of Hospital AI 2027: the buyer's scorecard with nine weighted criteria and one veto",
+            width: 909,
+            height: 1287,
+            title: "The buyer's scorecard",
+            caption: "Page 43 · Nine criteria, weighted, with one veto",
+            href: `${book.pdfHref}#page=43`,
+          },
+          {
+            src: "/images/hospital-ai-2027/eight-controls.jpg",
+            alt: "Page 52 of Hospital AI 2027: eight controls for a governed agent",
+            width: 909,
+            height: 1287,
+            title: "Eight controls for a governed agent",
+            caption: "Page 52 · Containing agents by design",
+            href: `${book.pdfHref}#page=52`,
+          },
+          {
+            src: "/images/hospital-ai-2027/readiness-check.jpg",
+            alt: "Page 77 of Hospital AI 2027: a twelve-question self-assessment of hospital AI readiness",
+            width: 909,
+            height: 1287,
+            title: "How ready is your hospital?",
+            caption: "Page 77 · A self-check scored out of 24",
+            href: `${book.pdfHref}#page=77`,
+          },
         ],
       },
       {
@@ -146,6 +199,14 @@ export const aboutStories: StoryBody[] = [
       {
         type: "principle",
         body: "Let AI do the work around care, prove every claim on your own data, and keep a named person accountable for every decision it touches.",
+      },
+      {
+        type: "cta",
+        eyebrow: "Read it now",
+        title: "Take it to your next steering committee.",
+        body: "Download the handbook, share it with your CIO, medical director and finance head, and run the readiness check together.",
+        primary: { label: "Get the free guide", href: book.href },
+        secondary: { label: "Open the PDF", href: book.pdfHref },
       },
       { type: "tags", items: ["Agentic AI", "Hospital information systems", "Governance", "Agent security", "Evaluation", "India", "GCC"] },
     ],

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight, Mail, Phone, Download } from "lucide-react";
 import type { Block } from "@/content/types";
 import type { SiteProfile } from "@/lib/content/site";
@@ -204,6 +205,94 @@ export function BlockRenderer({ block, profile }: { block: Block; profile: SiteP
             </pre>
             {block.caption && <figcaption className="border-t border-white/10 px-5 py-3 text-[13px] text-white/55">{block.caption}</figcaption>}
           </figure>
+        </section>
+      );
+    case "image": {
+      const img = (
+        <Image
+          src={block.src}
+          alt={block.alt}
+          width={block.width}
+          height={block.height}
+          sizes="(min-width: 1024px) 960px, 100vw"
+          className="h-auto w-full"
+        />
+      );
+      return (
+        <figure>
+          {block.href ? (
+            <a
+              href={block.href}
+              target="_blank"
+              rel="noopener"
+              className="block overflow-hidden rounded-[24px] ring-1 ring-black/[0.06] transition hover:opacity-95 hover:shadow-[var(--shadow-lift)]"
+            >
+              {img}
+            </a>
+          ) : (
+            <div className="overflow-hidden rounded-[24px] ring-1 ring-black/[0.06]">{img}</div>
+          )}
+          {block.caption && <figcaption className="mt-3 text-[14px] text-muted">{block.caption}</figcaption>}
+        </figure>
+      );
+    }
+    case "gallery":
+      return (
+        <section>
+          {block.heading && <Heading>{block.heading}</Heading>}
+          {block.intro && <p className="-mt-2 mb-5 max-w-3xl text-[16px] leading-relaxed text-ink-2">{block.intro}</p>}
+          <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {block.items.map((item) => (
+              <li key={item.src}>
+                <a href={item.href} target="_blank" rel="noopener" className="group block">
+                  <span className="block overflow-hidden rounded-xl bg-[#f5f5f7] shadow-sm ring-1 ring-black/[0.08] transition group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-lift)]">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width}
+                      height={item.height}
+                      sizes="(min-width: 1024px) 240px, 50vw"
+                      className="h-auto w-full"
+                    />
+                  </span>
+                  <span className="mt-3 flex items-start justify-between gap-2">
+                    <span className="text-[15px] font-semibold leading-snug text-ink">{item.title}</span>
+                    <ArrowUpRight aria-hidden className="mt-0.5 size-4 shrink-0 text-accent transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </span>
+                  <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">{item.caption}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    case "cta":
+      return (
+        <section className="rounded-[24px] bg-[#141416] px-6 py-8 text-white sm:px-10 sm:py-10">
+          {block.eyebrow && <p className="eyebrow text-white/55">{block.eyebrow}</p>}
+          <h2 className="display mt-2 max-w-2xl text-[1.7rem] sm:text-[2.2rem]">{block.title}</h2>
+          <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-white/75">{block.body}</p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={block.primary.href}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ff4f1f] px-6 py-3.5 text-[16px] font-semibold text-white transition hover:bg-[#ff6a40]"
+            >
+              <Download aria-hidden className="size-5" /> {block.primary.label}
+            </a>
+            {block.secondary && (
+              <a
+                href={block.secondary.href}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-6 py-3.5 text-[16px] font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/15"
+              >
+                {block.secondary.label} <ArrowUpRight aria-hidden className="size-5" />
+              </a>
+            )}
+          </div>
+          {block.note && <p className="mt-4 text-[13px] text-white/50">{block.note}</p>}
         </section>
       );
     case "contact":

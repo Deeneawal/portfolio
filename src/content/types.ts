@@ -74,6 +74,22 @@ export type Block =
   | { type: "decisions"; heading?: string; items: { title: string; context: string; choice: string; why: string }[] }
   | { type: "timeline"; heading?: string; items: { when: string; title: string; body?: string }[] }
   | { type: "code"; heading?: string; caption?: string; lang: string; code: string }
+  | { type: "image"; src: string; alt: string; width: number; height: number; href?: string; caption?: string }
+  | {
+      type: "gallery";
+      heading?: string;
+      intro?: string;
+      items: { src: string; alt: string; width: number; height: number; title: string; caption: string; href: string }[];
+    }
+  | {
+      type: "cta";
+      eyebrow?: string;
+      title: string;
+      body: string;
+      primary: { label: string; href: string };
+      secondary?: { label: string; href: string };
+      note?: string;
+    }
   | { type: "contact" };
 
 export interface StoryBody {
