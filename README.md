@@ -38,13 +38,14 @@ Without Supabase variables the site works fully; analytics and the editor just s
 | `VISITOR_SALT_SECRET` | Secret for the daily-rotating visitor hash (`openssl rand -hex 32`) |
 | `CRON_SECRET` | Bearer token for the daily `/api/keepalive` cron |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL, e.g. `https://zuhaibkhan.vercel.app` |
-| `RESEND_API_KEY` | Mail key for the contact form ([resend.com](https://resend.com)). Without it messages are still saved and shown in `/admin/messages`, just not emailed. |
+| `RESEND_API_KEY` | Optional mail key for the contact form ([resend.com](https://resend.com)). Without it, the live site forwards messages through FormSubmit, which needs one activation click in the recipient's inbox. Messages are always saved and shown in `/admin/messages`. |
+| `CONTACT_FORWARD` | Optional. `off` stops the FormSubmit forwarding; `formsubmit` turns it on outside production. |
 | `CONTACT_TO` | Optional. Where contact messages go; defaults to the email on the site. |
 | `CONTACT_FROM` | Optional. Sender shown on contact emails; defaults to Resend's test sender, which can deliver only to the Resend account's own address. |
 
 ## Database setup (one time)
 
-In the Supabase dashboard, open **SQL Editor**. Run `supabase/migrations/0001_analytics.sql`, then `supabase/migrations/0002_site_content.sql`. Then run `supabase/migrations/0003_contact_messages.sql` for contact messages; until you do, they are kept as private files in storage and still appear in `/admin/messages`.
+In the Supabase dashboard, open **SQL Editor**. Run `supabase/migrations/0001_analytics.sql`, then `supabase/migrations/0002_site_content.sql`. Contact messages are kept as private files in storage and need no setup; running `supabase/migrations/0003_contact_messages.sql` is optional and moves new ones to a table.
 
 To check that the data is private, query it with the public anon key. Each of these should return a 401 or 404, or an empty result:
 

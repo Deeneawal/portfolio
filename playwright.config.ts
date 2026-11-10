@@ -19,6 +19,6 @@ export default defineConfig({
     reuseExistingServer: false,
     timeout: 120_000,
     // Blank analytics config: the site must work with tracking as a silent no-op.
-    env: { SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", ADMIN_PASSWORD: "", ADMIN_SESSION_SECRET: "", VISITOR_SALT_SECRET: "", RESEND_API_KEY: "" },
+    env: { SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", ADMIN_PASSWORD: "", ADMIN_SESSION_SECRET: "", VISITOR_SALT_SECRET: "", RESEND_API_KEY: "", CONTACT_FORWARD: "off" },
   },
 });

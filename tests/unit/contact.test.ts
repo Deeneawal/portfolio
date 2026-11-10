@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildContactEmail } from "@/lib/contact/email";
+import { buildContactEmail, mailRoute } from "@/lib/contact/email";
 import { contactSchema, fieldErrors, looksAutomated } from "@/lib/contact/schema";
 import { MESSAGE_ID, newMessageId } from "@/lib/contact/store";
 
@@ -59,5 +59,16 @@ describe("stored message ids", () => {
     const older = newMessageId(1_762_780_000_000);
     const newer = newMessageId(1_762_780_000_001);
     expect(older < newer).toBe(true);
+  });
+});
+
+describe("how mail is sent", () => {
+  it("prefers a mail key, forwards on the live site, and sends nothing in tests or local runs", () => {
+    expect(mailRoute({ RESEND_API_KEY: "re_x", VERCEL_ENV: "production" })).toBe("resend");
+    expect(mailRoute({ VERCEL_ENV: "production" })).toBe("forward");
+    expect(mailRoute({ VERCEL_ENV: "preview" })).toBe("none");
+    expect(mailRoute({})).toBe("none");
+    expect(mailRoute({ VERCEL_ENV: "production", CONTACT_FORWARD: "off" })).toBe("none");
+    expect(mailRoute({ CONTACT_FORWARD: "formsubmit" })).toBe("forward");
   });
 });

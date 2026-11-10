@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Check, Mail, MailWarning, Reply, Undo2 } from "lucide-react";
 import { requireAdmin } from "@/lib/auth/admin";
-import { contactConfigured } from "@/lib/contact/email";
+import { mailRoute } from "@/lib/contact/email";
 import { listMessages, type StoredMessage } from "@/lib/contact/store";
 import { DeleteMessageButton } from "@/components/admin/DeleteMessageButton";
 import { OwnerFlag } from "@/components/admin/OwnerFlag";
@@ -108,7 +108,8 @@ export default async function MessagesPage() {
   await requireAdmin();
   const data = await listMessages();
   const unread = data.messages.filter((m) => !m.read).length;
-  const emailOn = contactConfigured();
+  const route = mailRoute();
+  const latestNotEmailed = data.messages[0]?.email_sent === false;
 
   return (
     <main id="main" className="mx-auto max-w-[900px] px-4 pb-20 pt-6 sm:px-6">
@@ -132,16 +133,14 @@ export default async function MessagesPage() {
         </p>
       )}
       {data.error && <p className="mt-6 rounded-2xl bg-[#ffe9e9] p-4 text-[14px] text-ink-2">Couldn&apos;t load every message: {data.error}.</p>}
-      {data.configured && data.storageOnly && (
-        <p className="mt-6 rounded-2xl bg-[#e8f2ff] p-4 text-[14px] text-ink-2">
-          Messages are being kept in private file storage. Run <code>supabase/migrations/0003_contact_messages.sql</code> in the Supabase SQL editor to move new ones to a table; nothing is lost
-          either way.
+      {data.configured && route === "forward" && latestNotEmailed && (
+        <p className="mt-6 rounded-2xl bg-[#fff8e6] p-4 text-[14px] text-ink-2">
+          The latest message was saved here but not emailed. Email alerts are waiting for one click: open the <strong>Activate Form</strong> email from FormSubmit in your Gmail inbox
+          (check spam too) and press its button. After that, every new message is emailed to you as well.
         </p>
       )}
-      {data.configured && !emailOn && (
-        <p className="mt-3 rounded-2xl bg-[#fff8e6] p-4 text-[14px] text-ink-2">
-          Email alerts are off, so new messages appear only on this page. Add <code>RESEND_API_KEY</code> in Vercel to also receive them by email.
-        </p>
+      {data.configured && route === "none" && (
+        <p className="mt-6 rounded-2xl bg-[#fff8e6] p-4 text-[14px] text-ink-2">Email alerts are off here, so new messages appear only on this page.</p>
       )}
 
       {data.messages.length > 0 && (

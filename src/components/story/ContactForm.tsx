@@ -169,7 +169,7 @@ export function ContactForm({ email }: { email: string }) {
         >
           <Send aria-hidden className="size-[18px]" /> {status.kind === "sending" ? "Sending…" : "Send message"}
         </button>
-        <p className="text-[13px] text-muted">Sent to me only. I keep it privately so I can reply.</p>
+        <p className="text-[13px] text-muted">Sent to me by email. I keep a private copy so I can reply.</p>
       </div>
 
       <div aria-live="polite">

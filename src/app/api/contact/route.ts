@@ -75,8 +75,8 @@ export async function POST(req: NextRequest) {
     page = null;
   }
 
-  const sent = contactConfigured() ? await sendContactEmail(input, { page }) : ({ ok: false, detail: "not_configured" } as const);
-  if (!sent.ok && sent.detail !== "not_configured") console.error("contact form: send failed:", sent.detail);
+  const sent = await sendContactEmail(input, { page });
+  if (!sent.ok && sent.detail !== "not_configured") console.error("contact form: email not sent:", sent.detail);
 
   const country = req.headers.get("x-vercel-ip-country");
   const stored = await saveMessage(input, {
