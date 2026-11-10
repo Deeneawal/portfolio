@@ -87,7 +87,7 @@ export const labStories: StoryBody[] = [
 export const aboutStories: StoryBody[] = [
   {
     slug: "hospital-ai-2027",
-    lede: `${book.title}: ${book.subtitle} is a field guide for hospital leaders on agentic AI. Surgy Health published it in November 2026 as a free PDF with its own ISBN. I'm one of its three authors, credited for platform engineering and agentic AI.`,
+    lede: `${book.title}: ${book.subtitle} is our newly published handbook for hospital CEOs, CIOs, medical directors and finance heads. It shows what changed in hospital AI in 2026, what is working, what to avoid, and how to choose and govern an AI-first hospital system in 2027. It's free to download.`,
     blocks: [
       {
         type: "stats",
@@ -111,44 +111,43 @@ export const aboutStories: StoryBody[] = [
         heading: "The argument",
         body: [
           "Hospital AI is moving through three stages. It started by listening: scribes that write the note. It is now acting: agents that draft prescriptions, chase approvals and answer patient calls, with a person signing off. Next comes orchestrating: many agents, people and systems coordinated around one hospital goal, with rules and an audit trail holding it together.",
-          "The book shows what changed in 2026, what is working, what to avoid, and how to choose and govern an AI-first hospital system in 2027.",
+          "Each stage brings real gains and real risk, so every chapter pairs what the evidence shows with what a hospital should do about it.",
         ],
       },
       {
         type: "list",
-        heading: "My part",
+        heading: "What's inside",
         items: [
-          {
-            title: "Daily Platform & Agentic AI Insights",
-            body: "From October I wrote a daily digest on platform engineering and agentic AI. It was one of the book's two research streams and kept it current into November.",
-          },
-          {
-            title: "A builder's view",
-            body: "My day job is building the systems that let AI agents run safely inside hospital software. I brought that view to the book: what an agent may do, what it must never reach, and who answers for it.",
-          },
+          { title: "Part I · Listening", body: "Ambient scribes are infrastructure now. What the latest large studies found, and why patient trust is the bottleneck." },
+          { title: "Part II · Acting", body: "The health record becomes a platform that agents plug into, the back office pays back first, and rules plus prediction plus generation beat a language model on its own." },
+          { title: "Part III · Orchestrating", body: "Agents, people and rules coordinated around one goal such as bed flow, and how to choose a hospital system for 2027." },
+          { title: "Part IV · Guardrails and markets", body: "Governance, security for agents that go off-script, where the money went, and the rules in India and the Gulf." },
+          { title: "Part V · The playbook", body: "How to prove AI works on your own data, and a 2027 blueprint for hospital leaders." },
         ],
       },
       {
         type: "list",
-        heading: "The chapters closest to my daily work",
+        heading: "Tools you can use the same day",
         columns: 2,
         items: [
-          { title: "04 · The model is not the moat", body: "Prices are falling and models can be swapped. Match the model to the stakes and keep the model layer replaceable." },
-          { title: "05 · When agents work together", body: "Open protocols, gateways, and a supervisor with a human escalation path instead of a swarm." },
-          { title: "09 · When agents go off-script", body: "Six real ways agents failed in 2026, and eight controls that contain them: own identity, no secrets inside, least privilege, approval for writes." },
-          { title: "14 · Proving it works", body: "An evaluation ladder: backtest on your own history, build tests from real failures, let the tool refuse, audit selectively." },
+          { title: "A buyer's scorecard", body: "Nine weighted criteria and one veto, the same for every vendor." },
+          { title: "Ten tender requirements", body: "What to ask of any hospital system in 2027." },
+          { title: "Eight controls for a governed agent", body: "From an identity for each agent to one gateway with a full audit trail." },
+          { title: "A 90-day plan", body: "Look, test, decide: a pilot that proves value before any long contract." },
+          { title: "A readiness check", body: "Twelve statements, scored out of 24, to run with your leadership team in an afternoon." },
+          { title: "Forty-five takeaways", body: "Three from each chapter, on two pages." },
         ],
       },
       {
         type: "text",
-        heading: "Why it matters for how I build",
-        body: "The controls the book asks hospitals to demand are the ones I already put around my own coding agents: scoped permissions, checks that run outside the model, a person approving anything that matters, and a record of what happened.",
+        heading: "Who wrote it",
+        body: "Three of us at Surgy Health: Mohammed Jamil Nasir (product and technology), Simran Nagekar (product engineering and research) and me (platform engineering and agentic AI). It draws on 56 research briefs and daily digests written between August and November 2026.",
       },
       {
         type: "principle",
         body: "Let AI do the work around care, prove every claim on your own data, and keep a named person accountable for every decision it touches.",
       },
-      { type: "tags", items: ["Agentic AI", "Platform engineering", "Agent security", "Evaluation", "Governance", "Healthcare", "Technical writing"] },
+      { type: "tags", items: ["Agentic AI", "Hospital information systems", "Governance", "Agent security", "Evaluation", "India", "GCC"] },
     ],
     related: ["agentic-workflow", "agent-setup", "safeguards", "writing"],
   },

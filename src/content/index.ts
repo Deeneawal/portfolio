@@ -55,10 +55,10 @@ export const stories: StoryMeta[] = [
   {
     slug: "hospital-ai-2027",
     group: "today",
-    eyebrow: "New · Book · Nov 2026",
+    eyebrow: "New · Our handbook · Nov 2026",
     title: "Hospital AI 2027",
     summary:
-      "I co-authored a field guide for hospital leaders on agentic AI: what works, what breaks, and how to keep agents inside their limits.",
+      "From listening to acting to orchestrating. Our newly published handbook for hospital leaders on agentic AI: what works, what to avoid, and how to choose a hospital system for 2027. Free to download.",
     size: "lg",
     tone: "dark",
     visual: {
@@ -67,7 +67,7 @@ export const stories: StoryMeta[] = [
       alt: "Cover of the book Hospital AI 2027: From listening to acting to orchestrating",
       width: 636,
       height: 900,
-      facts: ["Co-author", "15 chapters", "283 sources", "ISBN 978-93-346-0290-6", "Free PDF"],
+      facts: ["Free PDF", "15 chapters", "283 sources", "ISBN 978-93-346-0290-6"],
     },
     keywords: ["book", "ebook", "author", "hospital ai", "agentic ai", "isbn", "publication", "platform engineering"],
   },
