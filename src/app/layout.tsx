@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
-import { profile as defaultProfile, SITE_URL } from "@/content/profile";
+import { medium, profile as defaultProfile, SITE_URL } from "@/content/profile";
 import { getSiteContent } from "@/lib/content/site";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { Dock } from "@/components/chrome/Dock";
@@ -13,7 +13,7 @@ import { VercelInsights } from "@/components/analytics/VercelInsights";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", preload: false });
 
 const description =
-  "Zuhaib Ahmad Khan is an agentic full-stack engineer and product lead who builds multi-tenant healthcare SaaS end to end: React, TypeScript, PostgreSQL with RLS, serverless APIs, Flutter and AI. Based in Bengaluru, open to remote roles or relocation.";
+  "Zuhaib Ahmad Khan is an agentic full-stack and platform engineer and product lead who builds multi-tenant healthcare SaaS end to end: React, TypeScript, PostgreSQL with RLS, serverless APIs, Flutter and AI agents working inside guardrails. Co-author of Hospital AI 2027. Based in Bengaluru, open to remote roles or relocation.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     "Zuhaib Ahmad Khan",
     "full-stack developer",
     "agentic engineer",
+    "agentic AI",
+    "platform engineering",
+    "Hospital AI 2027",
     "React",
     "TypeScript",
     "PostgreSQL",
@@ -71,8 +74,8 @@ function personJsonLd(profile: Awaited<ReturnType<typeof getSiteContent>>["profi
   address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
   worksFor: { "@type": "Organization", name: profile.company, url: profile.companyUrl },
   alumniOf: { "@type": "CollegeOrUniversity", name: "JSS Academy of Technical Education, Bengaluru" },
-  sameAs: [profile.linkedin, profile.github, profile.leetcode],
-  knowsAbout: ["Full-stack development", "React", "TypeScript", "PostgreSQL", "Row-Level Security", "Flutter", "RAG", "AI agents"],
+  sameAs: [profile.linkedin, profile.github, profile.leetcode, medium],
+  knowsAbout: ["Full-stack development", "React", "TypeScript", "PostgreSQL", "Row-Level Security", "Flutter", "RAG", "AI agents", "Agentic AI", "Platform engineering"],
   };
 }
 

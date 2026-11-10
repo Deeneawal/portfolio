@@ -314,11 +314,11 @@ export const stories: StoryMeta[] = [
     group: "about",
     eyebrow: "Writing",
     title: "Notes from the field.",
-    summary: "A co-authored book on hospital AI, and three essays on hospital CRMs, chatbots and field force management.",
+    summary: "One co-authored book on hospital AI and four articles on hospital CRMs, chatbots and field force management.",
     size: "sm",
     tone: "light",
     visual: { kind: "icon", icon: "pen" },
-    keywords: ["blog", "articles", "writing", "book", "ebook"],
+    keywords: ["blog", "articles", "writing", "book", "ebook", "medium", "posts"],
   },
   {
     slug: "this-site",

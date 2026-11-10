@@ -49,9 +49,14 @@ export const workStories: StoryBody[] = [
         heading: "Read more",
         items: [
           {
+            label: "Inside SurgyCRM: building a hospital CRM that doesn't let patients slip through",
+            href: "https://medium.com/@zuhaib_99173/inside-surgycrm-building-a-hospital-crm-that-doesnt-let-patients-slip-through-ddacf54fccc5",
+            note: "My article on Medium · 28 Oct 2026",
+          },
+          {
             label: "Why hospitals need more than a CRM",
             href: "https://surgy.health/blog/surgycrm-healthcare-crm-patient-journey-management",
-            note: "My essay on surgy.health",
+            note: "My article on surgy.health · 11 Jun 2026",
           },
         ],
       },
@@ -92,7 +97,7 @@ export const workStories: StoryBody[] = [
           {
             label: "The Hospital Chatbot Playbook",
             href: "https://surgy.health/blog/hospital-website-chatbot-surgy-assist",
-            note: "My essay on surgy.health",
+            note: "My article on surgy.health · 24 Jul 2026",
           },
         ],
       },
@@ -184,7 +189,7 @@ export const workStories: StoryBody[] = [
           {
             label: "Field force management for healthcare",
             href: "https://surgy.health/blog/surgyfield-field-force-management-healthcare",
-            note: "My essay on surgy.health",
+            note: "My article on surgy.health · 24 Jul 2026",
           },
         ],
       },

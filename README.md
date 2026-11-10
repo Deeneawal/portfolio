@@ -8,7 +8,7 @@ An Apple-style portfolio built like an App Store "Today" feed. The home screen i
 
 | Area | How it works |
 |---|---|
-| **Stories** | 22 typed content files (`src/content`) rendered by one block renderer. Diagrams are responsive HTML/CSS components, with no product screenshots. |
+| **Stories** | 25 typed content files (`src/content`) rendered by one block renderer. Diagrams are responsive HTML/CSS components, with no product screenshots. |
 | **Card → sheet** | Next.js parallel route `@modal` plus intercepting route `(.)story/[slug]`. A Motion `layoutId` expands the card into the sheet. The sheet is a Radix Dialog with a focus trap, Esc to close and focus returned to the card. |
 | **Résumé** | `/api/resume` counts the download, then redirects to the PDF. You can upload a replacement PDF from the admin. |
 | **Private analytics** | First-party events (`/api/t`) are stored in Supabase. Bots are filtered out and visitor ids are anonymous hashes that rotate daily. RLS is on with zero policies, so the public keys can't read anything. Vercel Web Analytics and Speed Insights run alongside it. |

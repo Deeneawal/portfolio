@@ -106,10 +106,10 @@ export function IntroCard({ profile }: { profile: SiteProfile }) {
 export function StatsCard({ stats }: { stats: readonly { value: string; label: string }[] }) {
   return (
     <section
-      aria-label="Engineering at scale"
+      aria-label="SurgyCRM in numbers"
       className="flex flex-col justify-center rounded-[28px] bg-white p-6 shadow-[var(--shadow-tile)] ring-1 ring-black/[0.04] sm:col-span-2 sm:p-8 lg:col-span-4"
     >
-      <p className="eyebrow text-muted">Engineering at scale</p>
+      <p className="eyebrow text-muted">SurgyCRM in numbers</p>
       <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label}>

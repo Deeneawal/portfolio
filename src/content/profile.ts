@@ -53,23 +53,35 @@ export const book = {
   cover: "/images/hospital-ai-2027-cover.jpg",
 } as const;
 
-export const posts = [
+export const medium = "https://medium.com/@zuhaib_99173";
+
+/** Articles, newest first. Titles, dates and read times as shown on each published page. */
+export const posts: readonly { title: string; href: string; date: string; where: string; minutes?: number }[] = [
+  {
+    title: "Inside SurgyCRM: building a hospital CRM that doesn't let patients slip through",
+    href: "https://medium.com/@zuhaib_99173/inside-surgycrm-building-a-hospital-crm-that-doesnt-let-patients-slip-through-ddacf54fccc5",
+    date: "28 Oct 2026",
+    where: "Medium",
+  },
   {
     title: "The Hospital Chatbot Playbook: How SurgyCRM Turns Website Visitors Into Patients, 24/7",
     href: "https://surgy.health/blog/hospital-website-chatbot-surgy-assist",
     date: "24 Jul 2026",
+    where: "surgy.health",
     minutes: 11,
   },
   {
     title: "Field Force Management for Healthcare: How SurgyField Makes Every Referral Visit Countable",
     href: "https://surgy.health/blog/surgyfield-field-force-management-healthcare",
     date: "24 Jul 2026",
+    where: "surgy.health",
     minutes: 12,
   },
   {
     title: "Why Hospitals Need More Than a CRM: How SurgyCRM Closes the Gap Between Patient Acquisition and Lifetime Value",
     href: "https://surgy.health/blog/surgycrm-healthcare-crm-patient-journey-management",
     date: "11 Jun 2026",
+    where: "surgy.health",
     minutes: 11,
   },
-] as const;
+];

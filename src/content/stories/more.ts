@@ -1,4 +1,4 @@
-import { book, certifications, posts } from "../profile";
+import { book, certifications, medium, posts } from "../profile";
 import type { StoryBody } from "../types";
 
 export const labStories: StoryBody[] = [
@@ -278,6 +278,7 @@ export const aboutStories: StoryBody[] = [
           { label: "LeetCode", href: "https://leetcode.com/deeneawal", note: "Problem-solving practice" },
           { label: "GitHub", href: "https://github.com/Deeneawal", note: "Code and experiments" },
           { label: "LinkedIn", href: "https://www.linkedin.com/in/zuhaib-ahmad-khan", note: "Professional profile" },
+          { label: "Medium", href: medium, note: "Articles on building hospital software" },
         ],
       },
     ],
@@ -285,7 +286,7 @@ export const aboutStories: StoryBody[] = [
   },
   {
     slug: "writing",
-    lede: "I write about the products I build: the hospital problems behind them and how the software solves them. That now includes a co-authored book and three essays, all published by Surgy Health.",
+    lede: "I write about the products I build: the hospital problems behind them and how the software solves them. So far that is one co-authored book and four articles: three on surgy.health and one on Medium.",
     blocks: [
       {
         type: "links",
@@ -294,8 +295,17 @@ export const aboutStories: StoryBody[] = [
       },
       {
         type: "links",
-        heading: "Essays",
-        items: posts.map((p) => ({ label: p.title, href: p.href, note: `${p.date} · ${p.minutes} min read` })),
+        heading: "Articles",
+        items: posts.map((p) => ({
+          label: p.title,
+          href: p.href,
+          note: [p.date, p.where, p.minutes ? `${p.minutes} min read` : null].filter(Boolean).join(" · "),
+        })),
+      },
+      {
+        type: "links",
+        heading: "Follow",
+        items: [{ label: "Medium", href: medium, note: "@zuhaib_99173" }],
       },
     ],
     related: ["hospital-ai-2027", "surgycrm", "surgy-assist", "surgyfield"],
