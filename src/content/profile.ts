@@ -5,15 +5,15 @@ export const profile = {
   shortName: "Zuhaib",
   initials: "ZK",
   title: "Agentic Full-Stack Engineer",
-  role: "Full-Stack Engineer & Product Lead",
+  role: "Platform & Agentic AI Engineer · Product Lead",
   company: "Surgy Innovation Labs",
   companyUrl: "https://surgy.health",
   location: "Bengaluru, India",
   openTo: "open to remote or relocate",
-  availability: "Open to full-time roles in full-stack, applied AI and mobile, remote, in Bengaluru or relocating.",
+  availability: "Open to full-time roles in agentic AI, full-stack and mobile, remote, in Bengaluru or relocating.",
   headline: "I build hospital software end to end, along with the guardrails that let AI agents build it safely.",
   intro:
-    "I'm a full-stack engineer and product lead. I take products from a hospital's first requirement to production: React and TypeScript frontends, PostgreSQL with Row-Level Security, serverless APIs, Flutter apps, AI integrations and the automation that connects them.",
+    "I'm a platform and full-stack engineer and a product lead. I take products from a hospital's first requirement to production: React and TypeScript frontends, PostgreSQL with Row-Level Security, serverless APIs, Flutter apps, AI integrations and the automation that connects them. I'm also a co-author of Hospital AI 2027, a field guide to agentic AI for hospital leaders.",
   email: "zuhaibahmadkhan07@gmail.com",
   phone: "+91 63667 51866",
   phoneHref: "tel:+916366751866",
@@ -41,6 +41,17 @@ export const certifications = [
   { when: "Aug 2024", title: "Data Analytics & Visualization Job Simulation", issuer: "Accenture · Forage" },
   { when: "Dec 2022", title: "Machine Learning", issuer: "Take It Smart" },
 ] as const;
+
+/** The co-authored book. Facts as printed in the first edition and on its landing page. */
+export const book = {
+  title: "Hospital AI 2027",
+  subtitle: "From Listening to Acting to Orchestrating",
+  href: "https://surgy.health/hospital-ai-2027",
+  pdfHref: "https://surgy.health/hospital-ai-2027.pdf",
+  published: "Nov 2026",
+  isbn: "978-93-346-0290-6",
+  cover: "/images/hospital-ai-2027-cover.jpg",
+} as const;
 
 export const posts = [
   {

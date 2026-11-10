@@ -76,7 +76,152 @@ if (RISKY.some((re) => re.test(command))) {
         items: ["Claude Code", "Subagents", "Hooks", "Plan mode", "Lovable", "Cursor", "CI/CD"],
       },
     ],
-    related: ["safeguards", "planning-delivery", "platform-kit", "this-site"],
+    related: ["agent-setup", "safeguards", "cost-speed", "hospital-ai-2027"],
+  },
+  {
+    slug: "agent-setup",
+    lede:
+      "The model is the part I can't change. Everything around it I can: what it knows at the start, what it can run, what it's allowed to touch, what it remembers and what checks its work. That setup decides whether an agent is useful or dangerous.",
+    blocks: [
+      {
+        type: "list",
+        heading: "Five things I design for every agent",
+        columns: 2,
+        items: [
+          {
+            title: "Context",
+            body: "A written project guide in each repository: how the system works, the rules, and what went wrong before. The agent reads it at the start of every session, and it's updated in the same change as the code.",
+          },
+          {
+            title: "Tools",
+            body: "The agent gets a way to check its own work. Every file it edits is type-checked straight away, so it sees its mistake while it can still fix it cheaply.",
+          },
+          {
+            title: "Permissions",
+            body: "A check runs before every command and refuses the risky ones. Production commands, force-pushes and deploys need a person to say yes.",
+          },
+          {
+            title: "Memory",
+            body: "Decisions and lessons are written down where the next session will find them, so nothing has to be explained twice and settled questions stay settled.",
+          },
+          {
+            title: "Checks",
+            body: "Tests, a clean-database replay of every data change in CI, and my own review. Nothing the agent writes goes live until I have read it and can explain it.",
+          },
+          {
+            title: "Narrow agents",
+            body: "Risky jobs get their own agent with a short list of allowed and forbidden actions. The release agent can do one thing, and it asks before each deploy.",
+          },
+        ],
+      },
+      {
+        type: "steps",
+        heading: "When an agent gets it wrong",
+        items: [
+          { title: "Reproduce it", body: "Find the exact step where the agent went off course, from the session log and the diff." },
+          {
+            title: "Name the layer",
+            body: "Was it missing context, missing a tool, allowed too much, or was there no check to catch it? A better prompt is the last answer I reach for, not the first.",
+          },
+          { title: "Fix that layer", body: "Add the fact to the project guide, add the tool, tighten the permission, or write the check." },
+          { title: "Make it permanent", body: "The fix is committed with the code, so every later session and every teammate's agent starts with it." },
+        ],
+      },
+      {
+        type: "decisions",
+        heading: "Decisions, written down",
+        items: [
+          {
+            title: "Rules in code, not only in the prompt",
+            context: "An instruction in a prompt is a request. On a long task an agent can lose track of it.",
+            choice: "Anything that must never happen is enforced by a check that runs outside the model.",
+            why: "The agent can ignore a sentence. It can't ignore a command that refuses to run.",
+          },
+          {
+            title: "A separate agent for releases",
+            context: "A general coding agent with deploy rights can ship by accident.",
+            choice: "Releases run through one dedicated agent with explicit allowed and forbidden actions.",
+            why: "Small scope means small mistakes, and a short list of permissions is easy to review.",
+          },
+          {
+            title: "One standard for every repository",
+            context: "Several products, each with its own agent setup, drift apart.",
+            choice: "Shared rules and safety checks live in one engineering standard that every product follows.",
+            why: "A lesson learned in one product protects all of them.",
+          },
+        ],
+      },
+      { type: "principle", body: "When an agent fails, I fix its context, tools or checks. That fix lasts longer than a better prompt." },
+      { type: "tags", heading: "Tools", items: ["Claude Code", "Cursor", "Hooks", "Subagents", "Plan mode", "Project rules", "Session memory", "CI/CD"] },
+    ],
+    related: ["agentic-workflow", "safeguards", "cost-speed", "platform-kit"],
+  },
+  {
+    slug: "cost-speed",
+    lede:
+      "AI cost is easy to ignore until the bill arrives, and slow agents waste the time they were meant to save. I treat tokens and seconds as a budget, in the products I ship and in the way I work with agents.",
+    blocks: [
+      {
+        type: "list",
+        heading: "In the product",
+        columns: 2,
+        items: [
+          { title: "A budget for each AI use", body: "Every AI feature has its own daily budget and stops safely when it's spent. A bug or a traffic spike can't run up the bill." },
+          { title: "The cheap path first", body: "Urgent cases skip AI entirely and approved answers are served as they are. The model handles only what is left." },
+          { title: "Pay once", body: "Text is translated once and served from a permanent cache, not paid for on every view." },
+          { title: "Every call logged", body: "Each model call is recorded, so I can see where the spend goes, with automatic fallback when a model is unavailable." },
+        ],
+      },
+      {
+        type: "list",
+        heading: "In my own workflow",
+        columns: 2,
+        items: [
+          { title: "Plan before code", body: "A written plan costs little to review. A wrong build costs a rewrite and all the tokens that went into it." },
+          { title: "Small context, narrow agents", body: "Sub-agents do the reading and hand back only what matters, so the main session stays short and focused." },
+          { title: "Fail fast", body: "Checks run right after each edit. The agent learns it's wrong in seconds, before it builds more work on the mistake." },
+          { title: "Small diffs", body: "No drive-by refactors and no speculative features. Less to generate, less to review, less to break." },
+        ],
+      },
+      {
+        type: "beforeAfter",
+        heading: "What that looks like in numbers",
+        items: [
+          {
+            label: "AI translations",
+            before: "Paid on every view",
+            after: "Paid once per label",
+            how: "New text is batched and translated once, then served from a permanent cache.",
+          },
+          {
+            label: "Bulk import, 10,000 rows",
+            before: "≈30,000 requests",
+            after: "35 requests",
+            how: "Paged reads and batched writes, with retries that are safe to repeat.",
+          },
+        ],
+      },
+      {
+        type: "decisions",
+        heading: "Decisions, written down",
+        items: [
+          {
+            title: "AI for language, code for actions",
+            context: "Asking a model to perform a booking costs tokens and can go wrong.",
+            choice: "The model understands the request. Deterministic code does the booking.",
+            why: "Code is free to run, instant and right every time.",
+          },
+          {
+            title: "The simplest storage that works",
+            context: "A new AI feature needed similarity search over small per-customer datasets.",
+            choice: "Use the existing database instead of adding a specialised service.",
+            why: "Nothing new to run or pay for. Revisit only when the data outgrows it.",
+          },
+        ],
+      },
+      { type: "principle", body: "Every token should buy something: an answer, a check or a decision." },
+    ],
+    related: ["agent-setup", "performance", "surgy-assist", "planning-delivery"],
   },
   {
     slug: "safeguards",
@@ -104,6 +249,17 @@ if (RISKY.some((re) => re.test(command))) {
         ],
       },
       {
+        type: "list",
+        heading: "What an AI agent is never allowed to do",
+        columns: 2,
+        items: [
+          { title: "Reach production", body: "No agent runs scripts against production. Releases go through one narrow agent that asks a person before each deploy." },
+          { title: "Hold secrets", body: "Credentials stay out of the repository, and agents are told never to print or commit them." },
+          { title: "Rewrite history", body: "No force-pushes, no automatic pushes, and shipped data changes are never edited." },
+          { title: "Leave a half-finished job", body: "Data changes are rehearsed on a clean copy, imports and intake are safe to retry, and a failed release rolls back by itself." },
+        ],
+      },
+      {
         type: "steps",
         heading: "Change discipline",
         items: [
@@ -124,7 +280,7 @@ if (RISKY.some((re) => re.test(command))) {
       },
       { type: "principle", body: "An incident isn't closed until it has become a rule, a check or a test." },
     ],
-    related: ["agentic-workflow", "surgycrm", "platform-kit"],
+    related: ["agentic-workflow", "agent-setup", "surgycrm", "platform-kit"],
   },
   {
     slug: "planning-delivery",

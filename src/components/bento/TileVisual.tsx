@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { TileTone, TileVisual as TileVisualData } from "@/content/types";
 import { iconMap } from "@/components/icons";
 import { cn } from "@/lib/cn";
@@ -88,6 +89,29 @@ export function TileVisual({ visual, tone }: { visual: TileVisualData; tone: Til
             );
           })}
         </ol>
+      );
+    case "cover":
+      return (
+        <div className="flex w-full items-end gap-5 sm:gap-7">
+          <Image
+            src={visual.src}
+            alt={visual.alt}
+            width={visual.width}
+            height={visual.height}
+            sizes="(min-width: 640px) 160px, 120px"
+            className="h-44 w-auto shrink-0 -rotate-2 rounded-md shadow-[0_18px_40px_rgb(0_0_0/0.45)] ring-1 ring-black/10 sm:h-56"
+          />
+          <ul className="flex flex-wrap gap-2 pb-1">
+            {visual.facts.map((fact) => (
+              <li
+                key={fact}
+                className={cn("rounded-full px-3 py-1.5 text-xs font-medium", onDark ? "bg-white/10 text-white/85" : "bg-black/[0.05] text-ink-2")}
+              >
+                {fact}
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     case "chips":
       return (

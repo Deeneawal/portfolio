@@ -9,7 +9,8 @@ export type TileVisual =
   | { kind: "icon"; icon: IconName }
   | { kind: "terminal"; lines: string[] }
   | { kind: "journey"; steps: string[] }
-  | { kind: "chips"; items: string[] };
+  | { kind: "chips"; items: string[] }
+  | { kind: "cover"; src: string; alt: string; width: number; height: number; facts: string[] };
 
 export type IconName =
   | "shield"

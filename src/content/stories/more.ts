@@ -1,4 +1,4 @@
-import { certifications, posts } from "../profile";
+import { book, certifications, posts } from "../profile";
 import type { StoryBody } from "../types";
 
 export const labStories: StoryBody[] = [
@@ -86,6 +86,73 @@ export const labStories: StoryBody[] = [
 
 export const aboutStories: StoryBody[] = [
   {
+    slug: "hospital-ai-2027",
+    lede: `${book.title}: ${book.subtitle} is a field guide for hospital leaders on agentic AI. Surgy Health published it in November 2026 as a free PDF with its own ISBN. I'm one of its three authors, credited for platform engineering and agentic AI.`,
+    blocks: [
+      {
+        type: "stats",
+        items: [
+          { value: "15", label: "chapters in five parts" },
+          { value: "283", label: "sources cited, each with a date and a link" },
+          { value: "200", label: "news claims re-checked against the source" },
+          { value: "95", label: "pages" },
+        ],
+      },
+      {
+        type: "links",
+        heading: "Read it",
+        items: [
+          { label: "Hospital AI 2027 on surgy.health", href: book.href, note: "Book page and free download" },
+          { label: "Direct PDF", href: book.pdfHref, note: `First edition · ISBN ${book.isbn}` },
+        ],
+      },
+      {
+        type: "text",
+        heading: "The argument",
+        body: [
+          "Hospital AI is moving through three stages. It started by listening: scribes that write the note. It is now acting: agents that draft prescriptions, chase approvals and answer patient calls, with a person signing off. Next comes orchestrating: many agents, people and systems coordinated around one hospital goal, with rules and an audit trail holding it together.",
+          "The book shows what changed in 2026, what is working, what to avoid, and how to choose and govern an AI-first hospital system in 2027.",
+        ],
+      },
+      {
+        type: "list",
+        heading: "My part",
+        items: [
+          {
+            title: "Daily Platform & Agentic AI Insights",
+            body: "From October I wrote a daily digest on platform engineering and agentic AI. It was one of the book's two research streams and kept it current into November.",
+          },
+          {
+            title: "A builder's view",
+            body: "My day job is building the systems that let AI agents run safely inside hospital software. I brought that view to the book: what an agent may do, what it must never reach, and who answers for it.",
+          },
+        ],
+      },
+      {
+        type: "list",
+        heading: "The chapters closest to my daily work",
+        columns: 2,
+        items: [
+          { title: "04 · The model is not the moat", body: "Prices are falling and models can be swapped. Match the model to the stakes and keep the model layer replaceable." },
+          { title: "05 · When agents work together", body: "Open protocols, gateways, and a supervisor with a human escalation path instead of a swarm." },
+          { title: "09 · When agents go off-script", body: "Six real ways agents failed in 2026, and eight controls that contain them: own identity, no secrets inside, least privilege, approval for writes." },
+          { title: "14 · Proving it works", body: "An evaluation ladder: backtest on your own history, build tests from real failures, let the tool refuse, audit selectively." },
+        ],
+      },
+      {
+        type: "text",
+        heading: "Why it matters for how I build",
+        body: "The controls the book asks hospitals to demand are the ones I already put around my own coding agents: scoped permissions, checks that run outside the model, a person approving anything that matters, and a record of what happened.",
+      },
+      {
+        type: "principle",
+        body: "Let AI do the work around care, prove every claim on your own data, and keep a named person accountable for every decision it touches.",
+      },
+      { type: "tags", items: ["Agentic AI", "Platform engineering", "Agent security", "Evaluation", "Governance", "Healthcare", "Technical writing"] },
+    ],
+    related: ["agentic-workflow", "agent-setup", "safeguards", "writing"],
+  },
+  {
     slug: "toolkit",
     lede: "I work across the whole stack. These are the tools I use in production, grouped by layer.",
     blocks: [
@@ -123,8 +190,13 @@ export const aboutStories: StoryBody[] = [
         heading: "Experience & education",
         items: [
           {
+            when: "Nov 2026",
+            title: "Co-author · Hospital AI 2027",
+            body: `A field guide to agentic AI for hospital leaders, published by Surgy Health. ISBN ${book.isbn}.`,
+          },
+          {
             when: "Dec 2025 – now",
-            title: "Full-Stack Engineer & Product Lead · Surgy Innovation Labs",
+            title: "Platform & Agentic AI Engineer · Product Lead · Surgy Innovation Labs",
             body: "Bengaluru (hybrid). Built SurgyCRM and SurgyField, and lead development across SurgyCRM, SurgyDischarge and SurgyLearn.",
           },
           {
@@ -153,14 +225,20 @@ export const aboutStories: StoryBody[] = [
   },
   {
     slug: "writing",
-    lede: "I write about the products I build: the hospital problems behind them and how the software solves them. All three essays are published on surgy.health.",
+    lede: "I write about the products I build: the hospital problems behind them and how the software solves them. That now includes a co-authored book and three essays, all published by Surgy Health.",
     blocks: [
       {
         type: "links",
+        heading: "Book",
+        items: [{ label: `${book.title}: ${book.subtitle}`, href: book.href, note: `Co-author · ${book.published} · ISBN ${book.isbn}` }],
+      },
+      {
+        type: "links",
+        heading: "Essays",
         items: posts.map((p) => ({ label: p.title, href: p.href, note: `${p.date} · ${p.minutes} min read` })),
       },
     ],
-    related: ["surgycrm", "surgy-assist", "surgyfield"],
+    related: ["hospital-ai-2027", "surgycrm", "surgy-assist", "surgyfield"],
   },
   {
     slug: "this-site",
@@ -198,7 +276,7 @@ export const aboutStories: StoryBody[] = [
   },
   {
     slug: "contact",
-    lede: "I'm open to full-time roles in full-stack engineering, applied AI and mobile, remote, in Bengaluru or relocating, especially with teams working on real-world problems.",
+    lede: "I'm open to full-time roles in agentic AI, full-stack engineering and mobile, remote, in Bengaluru or relocating, especially with teams working on real-world problems.",
     blocks: [{ type: "contact" }],
     related: ["journey", "toolkit"],
   },
